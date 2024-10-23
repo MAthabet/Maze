@@ -7,68 +7,37 @@
 #include <vector>
 
 void findPlayer();
+void findGoal();
 void tgame();
 void setCursorPosition(int x, int y);
+void fileToVec();
+void printMaze();
+
+std::vector<std::vector<char> > maze;
+
+struct pos
+{
+	int x;
+	int y;
+};
 
 int main()
 {
-	std::string line;
-	std::ifstream infile("input.txt");
-	std::vector<std::vector<char> > maze;
-
-	while (std::getline(infile, line)) {
-		std::vector<char> row;
-
-		for (char& c : line) {
-			if (c != ',') {
-				row.push_back(c);
-			}
-		}
-
-		maze.push_back(row);
-	}
-
-	for (std::vector<char>& row : maze) {
-		for (char& c : row) {
-			std::cout << c << ' ';
-		}
-
-		std::cout << '\n';
-	}
+	fileToVec();
 	tgame();
 	return 0;
 }
+
 void findPlayer(){}
 
 void tgame()
 {
+	findPlayer();
+	findGoal();
 	bool win = false;
-	struct Pos {
-		int x;
-		int y;
-	}pos = { 5,5 };
-	Pos t = { 100,20 };
-	char mov;
-	char scr[29][120];
-	for (int i = 0; i < 29; i++)
-	{
-		for (int j = 0; j < 120; j++)
-		{
-			scr[i][j] = ' ';
-			if (j == 0 || j == 119) scr[i][j] = '\|';
-			if (i == 0 || i == 28) scr[i][j] = '-';
-		}
-	}
-	scr[t.y][t.x] = 'x';
-	system("cls");
-	for (int i = 0; i < 29; i++)
-	{
-		for (int j = 0; j < 120; j++)
-		{
-			std::cout << scr[i][j];
-		}
-		std::cout << std::endl;
-	}
+	char move;
+	
+	printMaze();
 	do {
 		setCursorPosition(pos.x, pos.y);
 		std::cout << "@";
@@ -110,4 +79,35 @@ void setCursorPosition(int x, int y)
 	std::cout.flush();
 	COORD coord = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(hOut, coord);
+}
+
+void findGoal(){}
+
+void fileToVec()
+{
+	std::string line;
+	std::ifstream infile("input.txt");
+
+	while (std::getline(infile, line)) {
+		std::vector<char> row;
+
+		for (char& c : line) {
+			if (c != ',') {
+				row.push_back(c);
+			}
+		}
+
+		maze.push_back(row);
+	}
+
+}
+
+void printMaze() {
+	for (std::vector<char>& row : maze) {
+		for (char& c : row) {
+			std::cout << c << ' ';
+		}
+
+		std::cout << '\n';
+	}
 }
