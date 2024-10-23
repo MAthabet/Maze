@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include <conio.h>
 #include <fstream>
+#include <vector>
+
 void setCursorPosition(int x, int y)
 {
 	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -76,29 +78,28 @@ void tgame()
 }
 int main()
 {
-	const int MAX_SIZE = 20*63;
-    int arr[MAX_SIZE];
-    int i = 0;
+	std::string line;
+	std::ifstream infile("input.txt");
+	std::vector<std::vector<char> > maze;
 
-    // Open the file for reading
-    std::ifstream file("input.txt");
-    if (!file) {
-        std::cerr << "Error opening file!" << std::endl;
-        return 1;
-    }
+	while (std::getline(infile, line)) {
+		std::vector<char> row;
 
-    // Read integers from the file and store them into the array
-    while (file >> arr[i] && i < MAX_SIZE) {
-        i++;
-    }
+		for (char& c : line) {
+			if (c != ',') {
+				row.push_back(c);
+			}
+		}
 
-    // Close the file
-    file.close();
+		maze.push_back(row);
+	}
 
-    // Print the array to verify the contents
-    std::cout << "Array contents: ";
-    for (int j = 0; j < i; j++) {
-        std::cout << arr[j] << " ";
-    }
-    std::cout << std::endl;
+	for (std::vector<char>& row : maze) {
+		for (char& c : row) {
+			std::cout << c << ' ';
+		}
+
+		std::cout << '\n';
+	}
+	return 0;
 }

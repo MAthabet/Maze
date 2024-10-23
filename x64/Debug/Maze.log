@@ -1,3 +1,3 @@
 ﻿  Maze.cpp
-D:\ITI-GameDev\Maze\Maze\Maze.cpp(29,40): warning C4129: '|': unrecognized character escape sequence
+D:\ITI-GameDev\Maze\Maze\Maze.cpp(31,40): warning C4129: '|': unrecognized character escape sequence
   Maze.vcxproj -> D:\ITI-GameDev\Maze\x64\Debug\Maze.exe
