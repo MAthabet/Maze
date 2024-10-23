@@ -29,8 +29,6 @@ int main()
 	return 0;
 }
 
-void findPlayer(){}
-
 void tgame()
 {
 	pos player = findPlayer();
