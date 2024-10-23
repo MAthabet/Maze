@@ -32,18 +32,19 @@ int main()
 void tgame()
 {
 	pos player = findPlayer();
-	pos goal = findGoal();
 	bool win = false;
 	char move;
-	
+	setCursorPosition(player.x, player.y);
+	printf("%d %d\n", player.x, player.y);
+	std::cout << ' ';
 	printMaze();
 	do {
 		setCursorPosition(player.x, player.y);
-		std::cout << "@";
+		std::cout << '@';
 		move = _getch();
 		if (maze[player.y][player.x] == ' ')
 		{
-			setCursorPosition(player.x, player.y);
+			setCursorPosition(player.y, player.x);
 			std::cout << ' ';
 		}
 		switch (move)
@@ -90,10 +91,13 @@ pos findPlayer()
 	int i, j;
 	for (i = 0; i < maze.size() ;i++) {
 		for (j = 0; j < maze[i].size() ;j++) {
-			if (maze[i][j] =='@') break;
+			if (maze[i][j] == '@')
+			{
+				return {j,i};
+			}
 		}
 	}
-	return { i,j };
+	
 }
 
 void fileToVec()
