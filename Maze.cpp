@@ -6,8 +6,14 @@
 #include <fstream>
 #include <vector>
 
-void findPlayer();
-void findGoal();
+struct pos
+{
+	int x;
+	int y;
+};
+
+pos findPlayer();
+pos findGoal();
 void tgame();
 void setCursorPosition(int x, int y);
 void fileToVec();
@@ -15,11 +21,7 @@ void printMaze();
 
 std::vector<std::vector<char> > maze;
 
-struct pos
-{
-	int x;
-	int y;
-};
+
 
 int main()
 {
@@ -32,8 +34,8 @@ void findPlayer(){}
 
 void tgame()
 {
-	findPlayer();
-	findGoal();
+	pos player = findPlayer();
+	pos goal = findGoal();
 	bool win = false;
 	char move;
 	
