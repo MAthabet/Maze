@@ -13,7 +13,6 @@ struct pos
 };
 
 pos findPlayer();
-pos findGoal();
 void tgame();
 void setCursorPosition(int x, int y);
 void fileToVec();
@@ -83,7 +82,17 @@ void setCursorPosition(int x, int y)
 	SetConsoleCursorPosition(hOut, coord);
 }
 
-void findGoal(){}
+// player is '@'
+pos findPlayer()
+{
+	int i, j;
+	for (i = 0; i < maze.size() ;i++) {
+		for (j = 0; j < maze[i].size() ;j++) {
+			if (maze[i][j] =='@') break;
+		}
+	}
+	return { i,j };
+}
 
 void fileToVec()
 {
