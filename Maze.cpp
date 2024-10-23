@@ -6,13 +6,40 @@
 #include <fstream>
 #include <vector>
 
-void setCursorPosition(int x, int y)
+void findPlayer();
+void tgame();
+void setCursorPosition(int x, int y);
+
+int main()
 {
-	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	std::cout.flush();
-	COORD coord = { (SHORT)x, (SHORT)y };
-	SetConsoleCursorPosition(hOut, coord);
+	std::string line;
+	std::ifstream infile("input.txt");
+	std::vector<std::vector<char> > maze;
+
+	while (std::getline(infile, line)) {
+		std::vector<char> row;
+
+		for (char& c : line) {
+			if (c != ',') {
+				row.push_back(c);
+			}
+		}
+
+		maze.push_back(row);
+	}
+
+	for (std::vector<char>& row : maze) {
+		for (char& c : row) {
+			std::cout << c << ' ';
+		}
+
+		std::cout << '\n';
+	}
+	tgame();
+	return 0;
 }
+void findPlayer(){}
+
 void tgame()
 {
 	bool win = false;
@@ -76,30 +103,11 @@ void tgame()
 	system("cls");
 	std::cout << "congratulations!!!\n\a";
 }
-int main()
+
+void setCursorPosition(int x, int y)
 {
-	std::string line;
-	std::ifstream infile("input.txt");
-	std::vector<std::vector<char> > maze;
-
-	while (std::getline(infile, line)) {
-		std::vector<char> row;
-
-		for (char& c : line) {
-			if (c != ',') {
-				row.push_back(c);
-			}
-		}
-
-		maze.push_back(row);
-	}
-
-	for (std::vector<char>& row : maze) {
-		for (char& c : row) {
-			std::cout << c << ' ';
-		}
-
-		std::cout << '\n';
-	}
-	return 0;
+	static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	std::cout.flush();
+	COORD coord = { (SHORT)x, (SHORT)y };
+	SetConsoleCursorPosition(hOut, coord);
 }
