@@ -24,29 +24,36 @@ std::vector<std::vector<char> > maze;
 
 int main()
 {
-	fileToVec();
 	tgame();
 	return 0;
 }
 
 void tgame()
 {
+	fileToVec();
+	printMaze();
+
 	pos player = findPlayer();
 	bool win = false;
 	char move;
-	setCursorPosition(player.x, player.y);
-	printf("%d %d\n", player.x, player.y);
-	std::cout << ' ';
-	printMaze();
+	
+	//setCursorPosition(player.x, player.y);
+	//std::cout << ' ';
+
+	
 	do {
 		setCursorPosition(player.x, player.y);
 		std::cout << '@';
 		move = _getch();
+		setCursorPosition(player.x, player.y);
+		std::cout << ' ';
+		//remove player pos
 		if (maze[player.y][player.x] == ' ')
 		{
-			setCursorPosition(player.y, player.x);
+			setCursorPosition(player.x, player.y);
 			std::cout << ' ';
 		}
+
 		switch (move)
 		{
 		case 'a':
@@ -75,6 +82,7 @@ void tgame()
 	} while (!win);
 	system("cls");
 	std::cout << "congratulations!!!\n\a";
+	while (!_kbhit());
 }
 
 void setCursorPosition(int x, int y)
@@ -122,7 +130,7 @@ void fileToVec()
 void printMaze() {
 	for (std::vector<char>& row : maze) {
 		for (char& c : row) {
-			std::cout << c << ' ';
+			std::cout << c ;
 		}
 
 		std::cout << '\n';
