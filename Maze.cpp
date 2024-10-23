@@ -41,31 +41,35 @@ void tgame()
 	
 	printMaze();
 	do {
-		setCursorPosition(pos.x, pos.y);
+		setCursorPosition(player.x, player.y);
 		std::cout << "@";
-		mov = _getch();
-		if (scr[pos.y][pos.x] == ' ')
+		move = _getch();
+		if (maze[player.y][player.x] == ' ')
 		{
-			setCursorPosition(pos.x, pos.y);
+			setCursorPosition(player.x, player.y);
 			std::cout << ' ';
 		}
-		switch (mov)
+		switch (move)
 		{
 		case 'a':
-			if (scr[pos.y][pos.x - 1] == ' ') pos.x -= 1;
-			if (scr[pos.y][pos.x - 1] == 'x') win = true;
+		case 'A':
+			if (maze[player.y][player.x - 1] == ' ') player.x -= 1;
+			if (maze[player.y][player.x - 1] == 'x') win = true;
 			break;
 		case 'd':
-			if (scr[pos.y][pos.x + 1] == ' ') pos.x += 1;
-			if (scr[pos.y][pos.x + 1] == 'x') win = true;
+		case 'D':
+			if (maze[player.y][player.x + 1] == ' ') player.x += 1;
+			if (maze[player.y][player.x + 1] == 'x') win = true;
 			break;
 		case 'w':
-			if (scr[pos.y - 1][pos.x] == ' ') pos.y -= 1;
-			if (scr[pos.y - 1][pos.x] == 'x') win = true;
+		case 'W':
+			if (maze[player.y - 1][player.x] == ' ') player.y -= 1;
+			if (maze[player.y - 1][player.x] == 'x') win = true;
 			break;
 		case 's':
-			if (scr[pos.y + 1][pos.x] == ' ') pos.y += 1;
-			if (scr[pos.y + 1][pos.x] == 'x') win = true;
+		case 'S':
+			if (maze[player.y + 1][player.x] == ' ') player.y += 1;
+			if (maze[player.y + 1][player.x] == 'x') win = true;
 			break;
 		default:
 			break;
